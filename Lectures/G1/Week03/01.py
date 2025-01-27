@@ -6,3 +6,5 @@ Plan for the lecture:
 - Classes and objects
 - Inheritance
 '''
+
+# Hello from class 726
