@@ -7,4 +7,10 @@ Plan for the lecture:
 - Inheritance
 '''
 
-# Hello from class 726
+# Tuples
+
+ourtuple = (1, 2, 3)
+
+print(ourtuple)
+
+print(type(ourtuple))
