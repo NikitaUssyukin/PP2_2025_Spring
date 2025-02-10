@@ -1,3 +1,9 @@
+# iterators and generators
+
+# iterators
+
+# https://docs.python.org/3/tutorial/classes.html#iterators
+
 class MyNums:
     def __init__(self, number=1):
         self.number = number
