@@ -3,19 +3,19 @@
 # https://docs.python.org/3/library/json.html#module-json
 
 # added after the lecture
+# don't forget to put data into the actual json file
+# python to JSON table:
+# https://docs.python.org/3/library/json.html#py-to-json-table
 
-# import json
+import json
 
-# class Car:
-#     def __init__(self, make, model, price):
-#         self.make = make
-#         self.model = model
-#         self.price = price
+json_file = 'ferrari.json'
 
-# ferrari_json = 'ferrari.json'
+with open(json_file, 'r') as file:
+    global ferrari
+    ferrari = json.load(file)
 
-# with open(ferrari_json, 'r', 'utf8') as file:
-#     global ferrari
-#     ferrari = json.load(file)
+print(type(ferrari))
 
-# print(ferrari)
+print(ferrari)
+print(ferrari["price"])
