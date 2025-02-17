@@ -1,6 +1,5 @@
 # Metacharacters
 # . ^ $ * + ? { } [ ] \ | ( )
-# . ^ $ * + ? { } [ ] \ | ( )
 # . - any symbol 
 # ^ - matches at the beginning
 # $ - matches at the end

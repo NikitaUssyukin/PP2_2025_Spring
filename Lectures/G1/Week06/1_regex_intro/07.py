@@ -1,6 +1,5 @@
 # Metacharacters
 # . ^ $ * + ? { } [ ] \ | ( )
-# . ^ $ * + ? { } [ ] \ | ( )
 # . - any symbol 
 # ^ - matches at the beginning
 # $ - matches at the end
@@ -22,10 +21,9 @@ with open(txt_file, 'r') as file:
 
 # print(text_to_match)
 
-pattern = r'[A-Z]\w+' # matching names
-# raw string - no need to escape a backslash
+pattern = r'([Aa] )?regular' # matching regular which can be preceeded by an article
 
-result = re.match(pattern, text_to_match)
+result = re.search(pattern, text_to_match) # search finds the first match in the given text
 
 print(result)
 print(result.group(0))
