@@ -19,10 +19,11 @@ import re
 
 text_to_match = "John's email is john.doe@example.com, and his backup is johndoe123@work.net."
 
-pattern = 'John' # our regex
+pattern = '[Jj]ohn' # our regex
 
-result = re.match(pattern, text_to_match)
+results = re.finditer(pattern, text_to_match)
 
-print(result) # match object
+print(results) # iterator with match objects
 
-print(result.group()) # print the match as a string
+for result in results:
+    print(result)
