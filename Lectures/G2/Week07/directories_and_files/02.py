@@ -1,0 +1,1 @@
+print('\U0001F47D') # alien emoji
