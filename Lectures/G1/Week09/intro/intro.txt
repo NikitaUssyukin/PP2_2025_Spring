@@ -1,0 +1,13 @@
+https://www.pygame.org/docs/ - Pygame documentation
+
+https://www.youtube.com/watch?v=AY9MnQ4x3zk - YouTube tutorial on Pygame
+
+https://nerdparadise.com/programming/pygame - Pygame tutorial for Lab07
+
+Installation:
+- open the terminal
+- in the terminal, run the following command:
+    - pip install pygame
+    - or
+    - pip3 install pygame
+- after that, try to import pygame into your code and try to run it
