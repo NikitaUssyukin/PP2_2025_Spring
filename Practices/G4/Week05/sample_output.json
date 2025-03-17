@@ -1,0 +1,20 @@
+[
+    "topology/pod-1/node-201/sys/phys-[eth1/33]",
+    "topology/pod-1/node-201/sys/phys-[eth1/34]",
+    "topology/pod-1/node-201/sys/phys-[eth1/35]",
+    "topology/pod-1/node-201/sys/phys-[eth1/36]",
+    "topology/pod-1/node-201/sys/phys-[eth1/1]",
+    "topology/pod-1/node-201/sys/phys-[eth1/2]",
+    "topology/pod-1/node-201/sys/phys-[eth1/3]",
+    "topology/pod-1/node-201/sys/phys-[eth1/4]",
+    "topology/pod-1/node-201/sys/phys-[eth1/5]",
+    "topology/pod-1/node-201/sys/phys-[eth1/6]",
+    "topology/pod-1/node-201/sys/phys-[eth1/7]",
+    "topology/pod-1/node-201/sys/phys-[eth1/8]",
+    "topology/pod-1/node-201/sys/phys-[eth1/9]",
+    "topology/pod-1/node-201/sys/phys-[eth1/10]",
+    "topology/pod-1/node-201/sys/phys-[eth1/11]",
+    "topology/pod-1/node-201/sys/phys-[eth1/12]",
+    "topology/pod-1/node-201/sys/phys-[eth1/13]",
+    "topology/pod-1/node-201/sys/phys-[eth1/14]"
+]
