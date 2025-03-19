@@ -1,5 +1,6 @@
 import pygame
 from color_palette import *
+import random
 
 pygame.init()
 
@@ -44,6 +45,20 @@ class Snake:
         self.body[0].x += self.dx
         self.body[0].y += self.dy
 
+        # checks the right border
+        if self.body[0].x > WIDTH // CELL - 1:
+            self.body[0].x = 0
+        # checks the left border
+        if self.body[0].x < 0:
+            self.body[0].x = WIDTH // CELL - 1
+        # checks the bottom border
+        if self.body[0].y > HEIGHT // CELL - 1:
+            self.body[0].y = 0
+        # checks the top border
+        if self.body[0].y < 0:
+            self.body[0].y = HEIGHT // CELL - 1
+
+
     def draw(self):
         head = self.body[0]
         pygame.draw.rect(screen, colorRED, (head.x * CELL, head.y * CELL, CELL, CELL))
@@ -55,6 +70,7 @@ class Snake:
         if head.x == food.pos.x and head.y == food.pos.y:
             print("Got food!")
             self.body.append(Point(head.x, head.y))
+            food.generate_random_pos()
 
 class Food:
     def __init__(self):
@@ -62,6 +78,10 @@ class Food:
 
     def draw(self):
         pygame.draw.rect(screen, colorGREEN, (self.pos.x * CELL, self.pos.y * CELL, CELL, CELL))
+
+    def generate_random_pos(self):
+        self.pos.x = random.randint(0, WIDTH // CELL - 1)
+        self.pos.y = random.randint(0, HEIGHT // CELL - 1)
 
 
 FPS = 5
@@ -103,3 +123,22 @@ while running:
     clock.tick(FPS)
 
 pygame.quit()
+
+'''
+#
+# # #
+
+-----
+
+#
+#
+# #
+
+-----
+
+#
+#
+#
+#
+
+'''

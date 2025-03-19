@@ -59,3 +59,11 @@ while not done:
 
     pygame.display.flip()
     clock.tick(60)
+
+'''
+
+x1, y1
+
+x2, y2
+
+'''

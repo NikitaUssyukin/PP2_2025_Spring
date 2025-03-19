@@ -45,7 +45,7 @@ while running:
             if LMBpressed:
                 currX = event.pos[0]
                 currY = event.pos[1]
-                screen.blit(base_layer, (0, 0))
+                # screen.blit(base_layer, (0, 0))
                 pygame.draw.rect(screen, colorRED, calculate_rect(prevX, prevY, currX, currY), THICKNESS)
 
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -54,7 +54,7 @@ while running:
             currX = event.pos[0]
             currY = event.pos[1]
             pygame.draw.rect(screen, colorRED, calculate_rect(prevX, prevY, currX, currY), THICKNESS)
-            base_layer.blit(screen, (0, 0))
+            # base_layer.blit(screen, (0, 0))
 
         if event.type == pygame.KEYDOWN: 
             if event.key == pygame.K_EQUALS:
