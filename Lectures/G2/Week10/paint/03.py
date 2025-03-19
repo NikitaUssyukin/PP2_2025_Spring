@@ -6,7 +6,7 @@ WIDTH = 800
 HEIGHT = 600
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-base_layer = pygame.Surface((WIDTH, HEIGHT))
+# base_layer = pygame.Surface((WIDTH, HEIGHT))
 
 colorRED = (255, 0, 0)
 colorBLUE = (0, 0, 255)
