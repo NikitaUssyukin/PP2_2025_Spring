@@ -32,8 +32,6 @@ running = True
 while running:
 
     for event in pygame.event.get():
-        if LMBpressed:
-            screen.blit(base_layer, (0, 0))
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -47,6 +45,7 @@ while running:
             if LMBpressed:
                 currX = event.pos[0]
                 currY = event.pos[1]
+                screen.blit(base_layer, (0, 0))
                 pygame.draw.rect(screen, colorRED, calculate_rect(prevX, prevY, currX, currY), THICKNESS)
 
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -64,8 +63,6 @@ while running:
             if event.key == pygame.K_MINUS:
                 print("reduced thickness")
                 THICKNESS -= 1
-
-    # pygame.draw.line(screen, colorRED, (prevX, prevY), (currX, currY), THICKNESS)
 
     pygame.display.flip()
     clock.tick(60)

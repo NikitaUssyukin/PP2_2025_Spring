@@ -27,15 +27,13 @@ prevY = 0
 def calculate_rect(x1, y1, x2, y2):
     return pygame.Rect(min(x1, x2), min(y1, y2), abs(x1 - x2), abs(y1 - y2))
 
-running = False
+running = True
 
-while not done:
+while running:
 
     for event in pygame.event.get():
-        if LMBpressed:
-            screen.blit(base_layer, (0, 0))
         if event.type == pygame.QUIT:
-            done = True
+            running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             print("LMB pressed!")
             LMBpressed = True
@@ -47,6 +45,7 @@ while not done:
             if LMBpressed:
                 currX = event.pos[0]
                 currY = event.pos[1]
+                screen.blit(base_layer, (0, 0))
                 pygame.draw.rect(screen, colorRED, calculate_rect(prevX, prevY, currX, currY), THICKNESS)
 
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -64,8 +63,6 @@ while not done:
             if event.key == pygame.K_MINUS:
                 print("reduced thickness")
                 THICKNESS -= 1
-
-    # pygame.draw.line(screen, colorRED, (prevX, prevY), (currX, currY), THICKNESS)
 
     pygame.display.flip()
     clock.tick(60)
