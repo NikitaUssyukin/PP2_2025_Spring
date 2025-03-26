@@ -6,6 +6,7 @@ WIDTH = 800
 HEIGHT = 600
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+base_layer = pygame.Surface((WIDTH, HEIGHT))
 
 colorRED = (255, 0, 0)
 colorBLUE = (0, 0, 255)
@@ -24,6 +25,19 @@ curr_y = mouse_y
 
 prev_x = mouse_x
 prev_y = mouse_y
+
+def calculate_rect(x1, y1, x2, y2):
+    return pygame.Rect(min(x1, x2), min(y1, y2), abs(x1 - x2), abs(y1 - y2))
+
+def draw_figure(figure_index):
+    if figure_index == 0:   # Line
+        pygame.draw.line(screen, colorRED, (prev_x, prev_y), (curr_x, curr_y), THICKNESS)
+    elif figure_index == 1: # Rectangle
+        pygame.draw.rect(screen, colorRED, calculate_rect(prev_x, prev_y, curr_x, curr_y), THICKNESS)
+
+figures = ['Line', 'Rectangle']
+
+figure_index = 0
 
 running = True
 
@@ -45,7 +59,8 @@ while running:
         if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             # print("LMB released!")
             LMBpressed = False
-            pygame.draw.line(screen, colorRED, (prev_x, prev_y), (curr_x, curr_y), THICKNESS)
+            draw_figure(figure_index)
+            base_layer.blit(screen, (0, 0))
         if event.type == pygame.KEYDOWN: 
             if event.key == pygame.K_EQUALS:
                 print("increased thickness")
@@ -53,11 +68,19 @@ while running:
             if event.key == pygame.K_MINUS:
                 print("reduced thickness")
                 THICKNESS -= 1
+            if event.key == pygame.K_UP:
+                figure_index += 1
+                if figure_index >= len(figures):
+                    figure_index = 0
+            if event.key == pygame.K_DOWN:
+                figure_index -= 1
+                if figure_index < 0:
+                    figure_index = len(figures) - 1
 
-    screen.fill(colorBLACK)
+    screen.blit(base_layer, (0, 0))
 
     if LMBpressed:
-        pygame.draw.line(screen, colorRED, (prev_x, prev_y), (curr_x, curr_y), THICKNESS)
+        draw_figure(figure_index)
 
     pygame.display.flip()
     clock.tick(60)
