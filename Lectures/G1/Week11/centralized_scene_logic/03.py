@@ -2,8 +2,16 @@
 
 import pygame
 from color_palette import *
+import random
 
 pygame.init()
+
+WIDTH = 600
+HEIGHT = 600
+
+FPS = 5
+
+
 
 class Point:
     def __init__(self, x, y):
@@ -13,13 +21,62 @@ class Point:
     def __str__(self):
         return f"{self.x}, {self.y}"
 
+
+
 class Snake:
     def __init__(self):
         self.body = [Point(10, 11), Point(10, 12), Point(10, 13)]
         self.dx = 1
         self.dy = 0
 
-        
+    def move(self, max_x, max_y):
+        for i in range(len(self.body) - 1, 0, -1):
+            self.body[i].x = self.body[i - 1].x
+            self.body[i].y = self.body[i - 1].y
+
+        self.body[0].x += self.dx
+        self.body[0].y += self.dy
+
+        # checks the right border
+        if self.body[0].x > max_x:
+            self.body[0].x = 0
+        # checks the left border
+        if self.body[0].x < 0:
+            self.body[0].x = max_x
+        # checks the bottom border
+        if self.body[0].y > max_y:
+            self.body[0].y = 0
+        # checks the top border
+        if self.body[0].y < 0:
+            self.body[0].y = max_y
+
+
+    def draw(self, screen, CELL):
+        head = self.body[0]
+        pygame.draw.rect(screen, colorRED, (head.x * CELL, head.y * CELL, CELL, CELL))
+        for segment in self.body[1:]:
+            pygame.draw.rect(screen, colorYELLOW, (segment.x * CELL, segment.y * CELL, CELL, CELL))
+
+    def check_collision(self, food, CELL):
+        head = self.body[0]
+        if head.x == food.pos.x and head.y == food.pos.y:
+            print("Got food!")
+            self.body.append(Point(head.x, head.y))
+            food.generate_random_pos(CELL)
+
+
+
+class Food:
+    def __init__(self):
+        self.pos = Point(9, 9)
+
+    def draw(self, screen, CELL):
+        pygame.draw.rect(screen, colorGREEN, (self.pos.x * CELL, self.pos.y * CELL, CELL, CELL))
+
+    def generate_random_pos(self, CELL):
+        self.pos.x = random.randint(0, WIDTH // CELL - 1)
+        self.pos.y = random.randint(0, HEIGHT // CELL - 1)
+
 
 
 class SceneBase:
@@ -40,6 +97,9 @@ class SceneBase:
     
     def Terminate(self):
         self.SwitchToScene(None)
+
+
+
 
 def run_game(width, height, fps, starting_scene):
     screen = pygame.display.set_mode((width, height))
@@ -113,6 +173,7 @@ class TitleScene(SceneBase):
         # For the sake of brevity, the title scene is a blank red screen
         
 
+
 class MenuScene(SceneBase):
 
     def __init__(self):
@@ -151,23 +212,55 @@ class MenuScene(SceneBase):
             rendered_text = self.font.render(text, True, colorBLACK)
             screen.blit(rendered_text, (60, i * 60 + 60))
 
+
+
 class GameScene(SceneBase):
 
-    CELL = 30
+    def __init__(self):
+        super().__init__()
+        self.CELL = 30
+        self.food = Food()
+        self.snake = Snake()
 
-def draw_grid():
-    for i in range(HEIGHT // CELL):
-        for j in range(WIDTH // CELL):
-            pygame.draw.rect(screen, colorGRAY, (i * CELL, j * CELL, CELL, CELL), 1)
+    def draw_grid(self, screen, WIDTH, HEIGHT):
+        for i in range(HEIGHT // self.CELL):
+            for j in range(WIDTH // self.CELL):
+                pygame.draw.rect(screen, colorGRAY, (i * self.CELL, j * self.CELL, self.CELL, self.CELL), 1)
 
-def draw_grid_chess():
-    colors = [colorWHITE, colorGRAY]
+    def draw_grid_chess(self, screen, WIDTH, HEIGHT):
+        colors = [colorWHITE, colorGRAY]
 
-    for i in range(HEIGHT // CELL):
-        for j in range(WIDTH // CELL):
-            pygame.draw.rect(screen, colors[(i + j) % 2], (i * CELL, j * CELL, CELL, CELL))
+        for i in range(HEIGHT // self.CELL):
+            for j in range(WIDTH // self.CELL):
+                pygame.draw.rect(screen, colors[(i + j) % 2], (i * self.CELL, j * self.CELL, self.CELL, self.CELL))
 
-
+    def ProcessInput(self, events, pressed_keys):
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.snake.dx = 1
+                    self.snake.dy = 0
+                elif event.key == pygame.K_LEFT:
+                    self.snake.dx = -1
+                    self.snake.dy = 0
+                elif event.key == pygame.K_DOWN:
+                    self.snake.dx = 0
+                    self.snake.dy = 1
+                elif event.key == pygame.K_UP:
+                    self.snake.dx = 0
+                    self.snake.dy = -1
+        
+    def Update(self):
+        max_x = WIDTH // self.CELL - 1
+        max_y = HEIGHT // self.CELL - 1
+        self.snake.move(max_x, max_y)
+        self.snake.check_collision(self.food, self.CELL)
     
+    def Render(self, screen):
+        screen.fill(colorBLACK)
+        self.draw_grid(screen, WIDTH, HEIGHT)
 
-run_game(400, 300, 60, TitleScene())
+        self.snake.draw(screen, self.CELL)
+        self.food.draw(screen, self.CELL)
+
+run_game(WIDTH, HEIGHT, FPS, TitleScene())
