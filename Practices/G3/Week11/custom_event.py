@@ -23,9 +23,9 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == FLIP_COLOR:
+        if event.type == FLIP_COLOR:                     # check for our custom FLIP_COLOR event
             is_red = not is_red                          # color flip
-        if event.type == INC_FLIP_FREQ:
+        if event.type == INC_FLIP_FREQ:                  # check for our custom INC_FLIP_FREQ event
             flip_freq += 1                               # increase flip frequency
             pygame.time.set_timer(FLIP_COLOR, int(1000 / flip_freq)) # update the timer with the new frequency
     
