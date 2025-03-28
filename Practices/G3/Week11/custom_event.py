@@ -17,6 +17,7 @@ FLIP_COLOR = pygame.USEREVENT + 2                        # custom event for flip
 
 pygame.time.set_timer(INC_FLIP_FREQ, 3000)               # create a timer that pushes the event INC_FLIP_FREQ into the event queue every 3000 ms
 pygame.time.set_timer(FLIP_COLOR, int(1000 / flip_freq)) # create a timer that pushes the event FLIP_COLOR into the event queue every int(1000 / flip_freq) ms
+                                                         # see https://www.pygame.org/docs/ref/time.html#pygame.time.set_timer
 
 while running:
     for event in pygame.event.get():
