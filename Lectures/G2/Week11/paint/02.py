@@ -36,8 +36,6 @@ while running:
             LMBpressed = True
             curr_x = event.pos[0]
             curr_y = event.pos[1]
-            prev_x = event.pos[0]
-            prev_y = event.pos[1]
         if event.type == pygame.MOUSEMOTION:
             # print("Position of the mouse:", event.pos)
             curr_x = event.pos[0]
@@ -54,10 +52,11 @@ while running:
                 print("reduced thickness")
                 THICKNESS -= 1
 
-    screen.fill(colorBLACK)
-
     if LMBpressed:
         pygame.draw.line(screen, colorRED, (prev_x, prev_y), (curr_x, curr_y), THICKNESS)
+
+    prev_x = curr_x
+    prev_y = curr_y
 
     pygame.display.flip()
     clock.tick(60)
