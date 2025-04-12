@@ -36,3 +36,25 @@
 # Retrieve - SELECT
 # Update - UPDATE
 # Delete - DELETE
+
+# psycopg2 - module used to work with PostgreSQL in python
+
+# To work with a database via psycopg2, you need 2 things:
+# connection
+# cursor
+
+import psycopg2
+
+conn = psycopg2.connect( # creating a connection
+    host="localhost",
+    database="suppliers",
+    user="postgres",
+    password="1234"
+)
+
+command = """SELECT version()"""
+
+with conn.cursor() as cur:
+    # execute the command
+    cur.execute(command)
+    print(cur.fetchone())
