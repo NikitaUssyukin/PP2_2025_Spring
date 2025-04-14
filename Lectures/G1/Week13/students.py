@@ -41,7 +41,4 @@ def csv_to_table(filename):
         print(error)
 
 # create_table()
-csv_to_table('students.csv')    
-
-
-
+csv_to_table('students.csv')   
